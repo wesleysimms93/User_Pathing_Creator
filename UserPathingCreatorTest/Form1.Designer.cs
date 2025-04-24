@@ -26,6 +26,7 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
+        /// 
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
@@ -34,12 +35,15 @@
             save_button = new Button();
             new_file_button = new Button();
             label1 = new Label();
+            undoButton = new Button();
+            redoButton = new Button();
             panel1 = new Panel();
             label2 = new Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             pathingCanvas = new Panel();
             openFileDialog1 = new OpenFileDialog();
             bindingSource1 = new BindingSource(components);
+            button1 = new Button();
             panelMenu = new Panel();
             panelMenu.SuspendLayout();
             panel1.SuspendLayout();
@@ -49,10 +53,13 @@
             // panelMenu
             // 
             panelMenu.BackColor = Color.ForestGreen;
+            panelMenu.Controls.Add(button1);
             panelMenu.Controls.Add(load_file_button);
             panelMenu.Controls.Add(save_button);
             panelMenu.Controls.Add(new_file_button);
             panelMenu.Controls.Add(label1);
+            panelMenu.Controls.Add(undoButton);
+            panelMenu.Controls.Add(redoButton);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
             panelMenu.Margin = new Padding(2, 4, 2, 4);
@@ -62,7 +69,7 @@
             // 
             // load_file_button
             // 
-            load_file_button.Location = new Point(102, 261);
+            load_file_button.Location = new Point(102, 300);
             load_file_button.Margin = new Padding(2, 4, 2, 4);
             load_file_button.Name = "load_file_button";
             load_file_button.Size = new Size(339, 69);
@@ -73,10 +80,10 @@
             // 
             // save_button
             // 
-            save_button.Location = new Point(161, 883);
+            save_button.Location = new Point(102, 200);
             save_button.Margin = new Padding(2, 4, 2, 4);
             save_button.Name = "save_button";
-            save_button.Size = new Size(182, 99);
+            save_button.Size = new Size(339, 69);
             save_button.TabIndex = 4;
             save_button.Text = "Save File";
             save_button.UseVisualStyleBackColor = true;
@@ -84,7 +91,7 @@
             // 
             // new_file_button
             // 
-            new_file_button.Location = new Point(102, 120);
+            new_file_button.Location = new Point(102, 100);
             new_file_button.Margin = new Padding(2, 4, 2, 4);
             new_file_button.Name = "new_file_button";
             new_file_button.Size = new Size(339, 69);
@@ -104,6 +111,28 @@
             label1.Size = new Size(399, 29);
             label1.TabIndex = 0;
             label1.Text = "🛠️ User Pathing Creator";
+            // 
+            // undoButton
+            // 
+            undoButton.Location = new Point(102, 500);
+            undoButton.Margin = new Padding(2, 4, 2, 4);
+            undoButton.Name = "undoButton";
+            undoButton.Size = new Size(339, 69);
+            undoButton.TabIndex = 2;
+            undoButton.Text = "Undo";
+            undoButton.UseVisualStyleBackColor = true;
+            undoButton.Click += UndoButton_Click;
+            // 
+            // redoButton
+            // 
+            redoButton.Location = new Point(102, 600);
+            redoButton.Margin = new Padding(2, 4, 2, 4);
+            redoButton.Name = "redoButton";
+            redoButton.Size = new Size(339, 69);
+            redoButton.TabIndex = 3;
+            redoButton.Text = "Redo";
+            redoButton.UseVisualStyleBackColor = true;
+            redoButton.Click += RedoButton_Click;
             // 
             // panel1
             // 
@@ -140,6 +169,16 @@
             openFileDialog1.FileName = "openFileDialog1";
             openFileDialog1.FileOk += openFileDialog1_FileOk;
             // 
+            // button1
+            // 
+            button1.Location = new Point(102, 879);
+            button1.Name = "button1";
+            button1.Size = new Size(339, 70);
+            button1.TabIndex = 7;
+            button1.Text = "Enable Z axis";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_3;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(23F, 45F);
@@ -161,6 +200,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ResumeLayout(false);
+
         }
 
         #endregion
@@ -175,5 +215,8 @@
         private Panel pathingCanvas;
         private OpenFileDialog openFileDialog1;
         private BindingSource bindingSource1;
+        private Button undoButton;
+        private Button redoButton;
+        private Button button1;
     }
 }

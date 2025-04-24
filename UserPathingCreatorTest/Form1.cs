@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
@@ -16,29 +16,61 @@ namespace UserPathingCreatorTest
         private Label coordLabel = new Label();
         private Panel pinnedPanel = new Panel();
         private Button toggleListButton = new Button();
+        private Button toggleZButton = new Button();
+        private TextBox zInputBox = new TextBox();
+        private bool zAxisEnabled = false;
+
+
+        private Stack<List<PathPoint>> undoStack = new Stack<List<PathPoint>>();
+        private Stack<List<PathPoint>> redoStack = new Stack<List<PathPoint>>();
+
 
         // Zoom-related variables
         private float zoomLevel = 1.0f;
         private const float zoomStep = 0.1f;
-        private const float zoomMin = 0.33f;
+        private float zoomMin = 1.0f;
         private const float zoomMax = 3.0f;
 
         public Form1()
         {
             InitializeComponent();
 
+
+            undoButton = new Button();
+            redoButton = new Button();
             new_file_button.Click += new_file_button_Click;
             save_button.Click += save_file_button_Click;
             load_file_button.Click += load_file_button_Click;
+            // Button to toggle the Z-axis
+            toggleZButton.Text = "Enable Z-Axis";
+            toggleZButton.Width = 120;
+            toggleZButton.Height = 30;
+            toggleZButton.Location = new Point(10, redoButton.Bottom + 10); // Adjust location as needed
+            toggleZButton.Click += (s, e) =>
+            {
+                zAxisEnabled = !zAxisEnabled;
+                toggleZButton.Text = zAxisEnabled ? "Disable Z-Axis" : "Enable Z-Axis";
+                zInputBox.Visible = zAxisEnabled;
+            };
+            this.Controls.Add(toggleZButton);
+
+            // Z-axis input box
+            zInputBox.Width = 60;
+            zInputBox.Height = 25;
+            zInputBox.Location = new Point(10, toggleZButton.Bottom + 5);
+            zInputBox.Visible = false;
+            zInputBox.Text = "0";
+            this.Controls.Add(zInputBox);
 
 
-            // Enable double buffering
+
+            // Enables double buffering
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.Padding = new Padding(borderSize);
             this.BackColor = Color.FromArgb(127, 207, 120);
 
-            // Coordinate label
+            // Coordinates label
             coordLabel.AutoSize = true;
             coordLabel.Font = new Font("Segoe UI", 9);
             coordLabel.ForeColor = Color.Black;
@@ -54,14 +86,14 @@ namespace UserPathingCreatorTest
                 pathingCanvas.Invalidate();
             };
 
-            // Setup pinned panel (always visible)
+            // Setup pinned panel to be always visible
             pinnedPanel.Width = 200;
             pinnedPanel.Dock = DockStyle.Right;
             pinnedPanel.BackColor = Color.White;
             pinnedPanel.Visible = true;
 
             // Toggle button
-            toggleListButton.Text = "Hide";
+            toggleListButton.Text = "Points";
             toggleListButton.Height = 60;
             toggleListButton.Dock = DockStyle.Top;
             toggleListButton.FlatStyle = FlatStyle.Flat;
@@ -69,7 +101,6 @@ namespace UserPathingCreatorTest
             toggleListButton.Click += (s, e) =>
             {
                 pinnedListBox.Visible = !pinnedListBox.Visible;
-                toggleListButton.Text = pinnedListBox.Visible ? "Hide" : "Show";
             };
 
             // List box setup
@@ -140,9 +171,12 @@ namespace UserPathingCreatorTest
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void Form1_Load(object sender, EventArgs e) { }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            zoomMin = Math.Max((float)pathingCanvas.Width / 7924f, (float)pathingCanvas.Height / 1524f);
+        }
         private void button1_Click(object sender, EventArgs e) { }
-        private void button1_Click_1(object sender, EventArgs e) => openFileDialog1.ShowDialog();
+        private void button1_Click_1(object sender, EventArgs e) { }
         private void button4_Click(object sender, EventArgs e) { }
         private void button1_Click_2(object sender, EventArgs e) { }
 
@@ -166,6 +200,36 @@ namespace UserPathingCreatorTest
             }
         }
 
+        private void UndoButton_Click(object sender, EventArgs e)
+        {
+            if (pathPoints.Count > 0)
+            {
+                redoStack.Push(new List<PathPoint>(pathPoints));
+                pathPoints = undoStack.Count > 0 ? undoStack.Pop() : new List<PathPoint>();
+                UpdatePinnedPointsAndUI();
+            }
+        }
+
+        private void RedoButton_Click(object sender, EventArgs e)
+        {
+            if (redoStack.Count > 0)
+            {
+                undoStack.Push(new List<PathPoint>(pathPoints));
+                pathPoints = redoStack.Pop();
+                UpdatePinnedPointsAndUI();
+            }
+        }
+
+        private void UpdatePinnedPointsAndUI()
+        {
+            pinnedPoints = new List<PathPoint>(pathPoints);
+            pinnedListBox.Items.Clear();
+            foreach (var point in pinnedPoints)
+            {
+                pinnedListBox.Items.Add($"{point.X},{point.Y}");
+            }
+            pathingCanvas.Invalidate();
+        }
 
         private void load_file_button_Click(object sender, EventArgs e)
         {
@@ -201,7 +265,6 @@ namespace UserPathingCreatorTest
             }
         }
 
-
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e) { }
 
         private void PathingCanvas_Paint(object sender, PaintEventArgs e)
@@ -216,36 +279,41 @@ namespace UserPathingCreatorTest
             Pen gridPen = new Pen(Color.LightGray, 1);
             int spacing = (int)(20 * zoomLevel); // Adjust spacing based on zoom
 
-            // Only draw grid in the upper-right quadrant
-            for (int x = 0; x <= canvas.Width; x += spacing)
-                g.DrawLine(gridPen, x, 0, x, canvas.Height);
-
-            for (int y = 0; y <= canvas.Height; y += spacing)
-                g.DrawLine(gridPen, 0, y, canvas.Width, y);
-
-            // Draw axes on the top-left corner of the grid
-            g.DrawLine(axisPen, 0, 0, 0, canvas.Height); // Y axis
-            g.DrawLine(axisPen, 0, 0, canvas.Width, 0);  // X axis
-
-            int dotSize = (int)(10 * zoomLevel); // Adjust dot size based on zoom
             int centerX = canvas.Width / 2;
             int centerY = canvas.Height / 2;
+
+            int logicalGridWidth = 7924;
+            int logicalGridHeight = 1524;
+
+            int halfWidth = (int)(logicalGridWidth / 2 * zoomLevel);
+            int halfHeight = (int)(logicalGridHeight / 2 * zoomLevel);
+
+            // Draw fixed grid up to 7924 x 1524 logical units
+            int maxGridWidth = (int)(7924 * zoomLevel);
+            int maxGridHeight = (int)(1524 * zoomLevel);
+
+            for (int x = 0; x <= maxGridWidth; x += spacing)
+                g.DrawLine(gridPen, x, 0, x, maxGridHeight);
+
+            for (int y = 0; y <= maxGridHeight; y += spacing)
+                g.DrawLine(gridPen, 0, y, maxGridWidth, y);
+
+
+            int dotSize = (int)(10 * zoomLevel); // Adjust dot size based on zoom
 
             foreach (var point in pathPoints)
             {
                 int x = centerX + (int)(point.X * zoomLevel);
                 int y = centerY - (int)(point.Y * zoomLevel);
 
-                // Check if point is within visible area (+ some buffer for dot size)
                 if (x < 0 || x >= canvas.Width || y < 0 || y >= canvas.Height)
                     continue;
 
-                Brush brush = point.Action == "Visible" ? Brushes.Green :
-                              point.Action == "IR" ? Brushes.Orange :
-                              point.Action == "Added" ? Brushes.Blue :
-                              Brushes.Red;
+                using (Font emojiFont = new Font("Segoe UI Emoji", 12 * zoomLevel, GraphicsUnit.Pixel))
+                {
+                    g.DrawString("🌿", emojiFont, Brushes.Black, x - dotSize / 2, y - dotSize / 2);
+                }
 
-                g.FillEllipse(brush, x - dotSize / 2, y - dotSize / 2, dotSize, dotSize);
             }
         }
 
@@ -280,9 +348,10 @@ namespace UserPathingCreatorTest
             int centerX = pathingCanvas.Width / 2;
             int centerY = pathingCanvas.Height / 2;
 
-            // Convert clicked pixel to logical (x, y) coordinates
-            int logicalX = (int)((e.X - centerX) / zoomLevel);
-            int logicalY = (int)((centerY - e.Y) / zoomLevel);
+            int spacing = (int)(20 * zoomLevel);
+            int logicalX = ((int)((e.X - centerX) / zoomLevel) / 20) * 20;
+            int logicalY = ((int)((centerY - e.Y) / zoomLevel) / 20) * 20;
+
 
             if (e.Button == MouseButtons.Right)
             {
@@ -292,6 +361,8 @@ namespace UserPathingCreatorTest
                     int px = (int)(centerX + pathPoints[i].X * zoomLevel);
                     int py = (int)(centerY - pathPoints[i].Y * zoomLevel);
 
+                    undoStack.Push(new List<PathPoint>(pathPoints));
+                    redoStack.Clear();
                     Rectangle hitbox = new Rectangle(px - 5, py - 5, 10, 10);
                     if (hitbox.Contains(e.Location))
                     {
@@ -310,6 +381,8 @@ namespace UserPathingCreatorTest
             {
                 // Left-click: add new point
                 PathPoint newPoint = new PathPoint { X = logicalX, Y = logicalY, Action = "Added" };
+                undoStack.Push(new List<PathPoint>(pathPoints));
+                redoStack.Clear();
                 pathPoints.Add(newPoint);
                 pinnedPoints.Add(newPoint);
                 pinnedListBox.Items.Add($"{newPoint.X},{newPoint.Y}");
@@ -327,12 +400,19 @@ namespace UserPathingCreatorTest
 
             pathingCanvas.Invalidate();
         }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class PathPoint
     {
         public int X { get; set; }
         public int Y { get; set; }
+
+        public int Z { get; set; }
         public string Action { get; set; }
     }
 }

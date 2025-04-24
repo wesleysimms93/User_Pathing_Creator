@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\girl dinner 💅🍹🥂\\Source\\Repos\\User_Pathing_Creator\\UserPathingCreatorTest\\UserPathingCreatorTest.csproj",
+      "projectUniqueName": "C:\\Users\\girl dinner 💅🍹🥂\\source\\repos\\UserPathingCreatorTest\\UserPathingCreatorTest\\UserPathingCreatorTest.csproj",
       "projectName": "UserPathingCreatorTest",
-      "projectPath": "C:\\Users\\girl dinner 💅🍹🥂\\Source\\Repos\\User_Pathing_Creator\\UserPathingCreatorTest\\UserPathingCreatorTest.csproj",
+      "projectPath": "C:\\Users\\girl dinner 💅🍹🥂\\source\\repos\\UserPathingCreatorTest\\UserPathingCreatorTest\\UserPathingCreatorTest.csproj",
       "packagesPath": "C:\\Users\\girl dinner 💅🍹🥂\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\girl dinner 💅🍹🥂\\Source\\Repos\\User_Pathing_Creator\\UserPathingCreatorTest\\obj\\",
+      "outputPath": "C:\\Users\\girl dinner 💅🍹🥂\\source\\repos\\UserPathingCreatorTest\\UserPathingCreatorTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
