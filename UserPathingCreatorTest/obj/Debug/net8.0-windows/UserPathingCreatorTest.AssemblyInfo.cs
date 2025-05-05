@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UserPathingCreatorTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02cadea37345bb35ce364fa33b664234d93a2a8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b2ed14a937634e843450ebf4e60360bc4a030c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("UserPathingCreatorTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UserPathingCreatorTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
