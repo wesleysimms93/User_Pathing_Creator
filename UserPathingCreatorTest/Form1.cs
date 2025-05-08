@@ -19,19 +19,12 @@ namespace UserPathingCreatorTest
         private Button toggleZButton = new Button();
         private TextBox zInputBox = new TextBox();
         private bool zAxisEnabled = false;
-<<<<<<< HEAD
+
         private bool waitingForZClick = false;
         private Button setZButton = new Button();
 
         private Stack<List<PathPoint>> undoStack = new Stack<List<PathPoint>>();
         private Stack<List<PathPoint>> redoStack = new Stack<List<PathPoint>>();
-=======
-
-
-        private Stack<List<PathPoint>> undoStack = new Stack<List<PathPoint>>();
-        private Stack<List<PathPoint>> redoStack = new Stack<List<PathPoint>>();
-
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
 
         // Zoom-related variables
         private float zoomLevel = 1.0f;
@@ -41,25 +34,17 @@ namespace UserPathingCreatorTest
         public Form1()
         {
             InitializeComponent();
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
             undoButton = new Button();
             redoButton = new Button();
             new_file_button.Click += new_file_button_Click;
             save_button.Click += save_file_button_Click;
             load_file_button.Click += load_file_button_Click;
-<<<<<<< HEAD
             toggleZButton.Text = "Enable Z Axis";
             toggleZButton.Width = 120;
             toggleZButton.Height = 30;
             toggleZButton.Location = new Point(10, 10);
             toggleZButton.Click += button1_Click_3;
             this.Controls.Add(toggleZButton);
-=======
-            // Button to toggle the Z-axis
             toggleZButton.Text = "Enable Z-Axis";
             toggleZButton.Width = 120;
             toggleZButton.Height = 30;
@@ -73,44 +58,30 @@ namespace UserPathingCreatorTest
             this.Controls.Add(toggleZButton);
 
             // Z-axis input box
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
             zInputBox.Width = 60;
             zInputBox.Height = 25;
             zInputBox.Location = new Point(10, toggleZButton.Bottom + 5);
             zInputBox.Visible = false;
             zInputBox.Text = "0";
             this.Controls.Add(zInputBox);
-<<<<<<< HEAD
             setZButton.Text = "Set Z Value";
             setZButton.Width = 120;
             setZButton.Height = 30;
             setZButton.Location = new Point(10, zInputBox.Bottom + 10);
             setZButton.Visible = false;
-=======
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
 
             setZButton.Click += (s, e) =>
             {
                 waitingForZClick = true;
                 MessageBox.Show("Click a point to set its Z value.", "Z Axis Input");
             };
-
-<<<<<<< HEAD
             this.Controls.Add(setZButton);
-=======
 
             // Enables double buffering
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.Padding = new Padding(borderSize);
             this.BackColor = Color.FromArgb(127, 207, 120);
-
-<<<<<<< HEAD
-            // Label coordinates
-=======
-            // Coordinates label
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
             coordLabel.AutoSize = true;
             coordLabel.Font = new Font("Segoe UI", 9);
             coordLabel.ForeColor = Color.Black;
@@ -131,12 +102,9 @@ namespace UserPathingCreatorTest
             pinnedPanel.Dock = DockStyle.Right;
             pinnedPanel.BackColor = Color.White;
             pinnedPanel.Visible = true;
-
-<<<<<<< HEAD
             // Toggle button for pinned points
-=======
+
             // Toggle button
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
             toggleListButton.Text = "Points";
             toggleListButton.Height = 60;
             toggleListButton.Dock = DockStyle.Top;
@@ -216,22 +184,16 @@ namespace UserPathingCreatorTest
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         private void Form1_Load(object sender, EventArgs e)
         {
             zoomMin = Math.Max((float)pathingCanvas.Width / 7924f, (float)pathingCanvas.Height / 1524f);
         }
         private void button1_Click(object sender, EventArgs e) { }
         private void button1_Click_1(object sender, EventArgs e) { }
-<<<<<<< HEAD
-=======
         private void button4_Click(object sender, EventArgs e) { }
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         private void button1_Click_2(object sender, EventArgs e) { }
-        private void button1_Click_3(object sender, EventArgs e)
+       /* private void button1_Click_3(object sender, EventArgs e)
         {
             zAxisEnabled = !zAxisEnabled;
             button1.Text = zAxisEnabled ? "Disable Z axis" : "Enable Z axis";
@@ -244,7 +206,8 @@ namespace UserPathingCreatorTest
                 MessageBox.Show("Left click a point to highlight and edit its Z value.", "Z Axis Enabled");
             }
         }
-        private void button4_Click(object sender, EventArgs e) { }
+       */
+        //private void button4_Click(object sender, EventArgs e) { }
         private void new_file_button_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -264,10 +227,6 @@ namespace UserPathingCreatorTest
                 MessageBox.Show("New file started. All points cleared.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         private void UndoButton_Click(object sender, EventArgs e)
         {
             if (pathPoints.Count > 0)
@@ -277,10 +236,6 @@ namespace UserPathingCreatorTest
                 UpdatePinnedPointsAndUI();
             }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         private void RedoButton_Click(object sender, EventArgs e)
         {
             if (redoStack.Count > 0)
@@ -290,17 +245,12 @@ namespace UserPathingCreatorTest
                 UpdatePinnedPointsAndUI();
             }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         private void UpdatePinnedPointsAndUI()
         {
             pinnedPoints = new List<PathPoint>(pathPoints);
             pinnedListBox.Items.Clear();
             foreach (var point in pinnedPoints)
             {
-<<<<<<< HEAD
                 if (zAxisEnabled)
                     pinnedListBox.Items.Add($"{point.X},{point.Y},{point.Z}");
                 else
@@ -308,13 +258,15 @@ namespace UserPathingCreatorTest
             }
             pathingCanvas.Invalidate();
         }
-=======
-                pinnedListBox.Items.Add($"{point.X},{point.Y}");
-            }
-            pathingCanvas.Invalidate();
-        }
+        /// <summary>
+        //       pinnedListBox.Items.Add($"{point.X},{point.Y}");
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //    }
+        //    pathingCanvas.Invalidate();
+        //}
 
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         private void load_file_button_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog
@@ -348,10 +300,6 @@ namespace UserPathingCreatorTest
                 MessageBox.Show("File loaded successfully!");
             }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e) { }
         private void PathingCanvas_Paint(object sender, PaintEventArgs e)
         {
@@ -367,7 +315,7 @@ namespace UserPathingCreatorTest
 
             int centerX = canvas.Width / 2;
             int centerY = canvas.Height / 2;
-<<<<<<< HEAD
+
             int logicalGridWidth = 7924;
             int logicalGridHeight = 1524;
             int halfWidth = (int)(logicalGridWidth / 2 * zoomLevel);
@@ -382,27 +330,6 @@ namespace UserPathingCreatorTest
 
             for (int y = 0; y <= canvas.Height; y += spacing)
                 g.DrawLine(gridPen, 0, y, canvas.Width, y);
-
-            int dotSize = (int)(10 * zoomLevel); // Adjust dot size based on zoom
-=======
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
-
-            int logicalGridWidth = 7924;
-            int logicalGridHeight = 1524;
-
-            int halfWidth = (int)(logicalGridWidth / 2 * zoomLevel);
-            int halfHeight = (int)(logicalGridHeight / 2 * zoomLevel);
-
-            // Draw fixed grid up to 7924 x 1524 logical units
-            int maxGridWidth = (int)(7924 * zoomLevel);
-            int maxGridHeight = (int)(1524 * zoomLevel);
-
-            for (int x = 0; x <= maxGridWidth; x += spacing)
-                g.DrawLine(gridPen, x, 0, x, maxGridHeight);
-
-            for (int y = 0; y <= maxGridHeight; y += spacing)
-                g.DrawLine(gridPen, 0, y, maxGridWidth, y);
-
 
             int dotSize = (int)(10 * zoomLevel); // Adjust dot size based on zoom
 
@@ -452,7 +379,6 @@ namespace UserPathingCreatorTest
             int logicalX = ((int)(e.X / zoomLevel) / 20) * 20;
             int logicalY = ((int)(e.Y / zoomLevel) / 20) * 20;
 
-<<<<<<< HEAD
             if (waitingForZClick && e.Button == MouseButtons.Left)
             {
                 foreach (var point in pathPoints)
@@ -484,12 +410,12 @@ namespace UserPathingCreatorTest
                 waitingForZClick = false;
                 return;
             }
-=======
-            int spacing = (int)(20 * zoomLevel);
-            int logicalX = ((int)((e.X - centerX) / zoomLevel) / 20) * 20;
-            int logicalY = ((int)((centerY - e.Y) / zoomLevel) / 20) * 20;
 
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
+            //int spacing = (int)(20 * zoomLevel);
+            //int logicalX = ((int)((e.X - centerX) / zoomLevel) / 20) * 20;
+            //int logicalY = ((int)((centerY - e.Y) / zoomLevel) / 20) * 20;
+
+
 
             if (e.Button == MouseButtons.Right)
             {
@@ -542,52 +468,44 @@ namespace UserPathingCreatorTest
 
             pathingCanvas.Invalidate();
         }
-<<<<<<< HEAD
+
         private void EditZMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!zAxisEnabled || pinnedListBox.SelectedIndex == -1)
-                return;
-=======
+            {
+                if (!zAxisEnabled || pinnedListBox.SelectedIndex == -1)
+            {  return; }
 
+            }
         private void button1_Click_3(object sender, EventArgs e)
-        {
-
-        }
-    }
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
-
-            var selected = pinnedListBox.SelectedItem.ToString();
-            var parts = selected.Split(',');
-
-            if (parts.Length < 2 || !int.TryParse(parts[0], out int x) || !int.TryParse(parts[1], out int y))
-                return;
-
-            var point = pathPoints.FirstOrDefault(p => p.X == x && p.Y == y);
-            if (point == null) return;
-
-            string input = Microsoft.VisualBasic.Interaction.InputBox(
-                $"Set Z value for ({x},{y}):", "Edit Z", point.Z.ToString());
-
-            if (int.TryParse(input, out int zValue) && zValue >= 0)
             {
-                point.Z = zValue;
-                UpdatePinnedPointsAndUI();
-            }
-            else
-            {
-                MessageBox.Show("Invalid Z value. Must be a whole number ≥ 0.");
+
+                var selected = pinnedListBox.SelectedItem.ToString();
+                var parts = selected.Split(',');
+
+                if (parts.Length < 2 || !int.TryParse(parts[0], out int x) || !int.TryParse(parts[1], out int y))
+                    return;
+
+                var point = pathPoints.FirstOrDefault(p => p.X == x && p.Y == y);
+                if (point == null) return;
+
+                string input = Microsoft.VisualBasic.Interaction.InputBox(
+                    $"Set Z value for ({x},{y}):", "Edit Z", point.Z.ToString());
+
+                if (int.TryParse(input, out int zValue) && zValue >= 0)
+                {
+                    point.Z = zValue;
+                    UpdatePinnedPointsAndUI();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Z value. Must be a whole number ≥ 0.");
+                }
             }
         }
 
-    }
     public class PathPoint
     {
         public int X { get; set; }
         public int Y { get; set; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9adea82d576d8207838175de6c52f4d82a2c8979
         public int Z { get; set; }
         public string Action { get; set; }
     }

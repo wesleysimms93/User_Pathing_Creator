@@ -31,3 +31,20 @@ C:\Users\girl dinner 💅🍹🥂\Source\Repos\User_Pathing_Creator\UserPathingC
 C:\Users\girl dinner 💅🍹🥂\Source\Repos\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.pdb
 C:\Users\girl dinner 💅🍹🥂\Source\Repos\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.genruntimeconfig.cache
 C:\Users\girl dinner 💅🍹🥂\Source\Repos\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\ref\UserPathingCreatorTest.dll
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.Form1.resources
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.csproj.GenerateResource.cache
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.AssemblyInfoInputs.cache
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.AssemblyInfo.cs
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.csproj.CoreCompileInputs.cache
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.sourcelink.json
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.dll
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\refint\UserPathingCreatorTest.dll
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.pdb
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\bin\Debug\net8.0-windows\UserPathingCreatorTest.exe
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\bin\Debug\net8.0-windows\UserPathingCreatorTest.deps.json
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\bin\Debug\net8.0-windows\UserPathingCreatorTest.runtimeconfig.json
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\bin\Debug\net8.0-windows\UserPathingCreatorTest.dll
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\bin\Debug\net8.0-windows\UserPathingCreatorTest.pdb
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\UserPathingCreatorTest.genruntimeconfig.cache
+C:\Users\tntbu\Source\Repos\wesleysimms93\User_Pathing_Creator\UserPathingCreatorTest\obj\Debug\net8.0-windows\ref\UserPathingCreatorTest.dll
