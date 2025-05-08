@@ -31,6 +31,7 @@
         {
             components = new System.ComponentModel.Container();
             Panel panelMenu;
+            button1 = new Button();
             load_file_button = new Button();
             save_button = new Button();
             new_file_button = new Button();
@@ -43,16 +44,18 @@
             pathingCanvas = new Panel();
             openFileDialog1 = new OpenFileDialog();
             bindingSource1 = new BindingSource(components);
-            button1 = new Button();
+            zval = new NumericUpDown();
             panelMenu = new Panel();
             panelMenu.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)zval).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.ForestGreen;
+            panelMenu.Controls.Add(zval);
             panelMenu.Controls.Add(button1);
             panelMenu.Controls.Add(load_file_button);
             panelMenu.Controls.Add(save_button);
@@ -66,6 +69,17 @@
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(500, 1048);
             panelMenu.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(102, 879);
+            button1.Name = "button1";
+            button1.Size = new Size(339, 70);
+            button1.TabIndex = 7;
+            button1.Text = "Enable Z axis";
+            button1.UseVisualStyleBackColor = true;
+            button1.Visible = false;
+            button1.Click += button1_Click_3;
             // 
             // load_file_button
             // 
@@ -108,7 +122,7 @@
             label1.Location = new Point(48, 28);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(399, 29);
+            label1.Size = new Size(164, 12);
             label1.TabIndex = 0;
             label1.Text = "🛠️ User Pathing Creator";
             // 
@@ -153,7 +167,7 @@
             label2.Location = new Point(35, 28);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(320, 53);
+            label2.Size = new Size(132, 22);
             label2.TabIndex = 0;
             label2.Text = "DASHBOARD";
             // 
@@ -169,19 +183,16 @@
             openFileDialog1.FileName = "openFileDialog1";
             openFileDialog1.FileOk += openFileDialog1_FileOk;
             // 
-            // button1
+            // zval
             // 
-            button1.Location = new Point(102, 879);
-            button1.Name = "button1";
-            button1.Size = new Size(339, 70);
-            button1.TabIndex = 7;
-            button1.Text = "Enable Z axis";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_3;
+            zval.Location = new Point(140, 811);
+            zval.Name = "zval";
+            zval.Size = new Size(218, 26);
+            zval.TabIndex = 8;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(23F, 45F);
+            AutoScaleDimensions = new SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Beige;
             ClientSize = new Size(2384, 1048);
@@ -199,8 +210,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)zval).EndInit();
             ResumeLayout(false);
-
         }
 
         #endregion
@@ -218,5 +229,6 @@
         private Button undoButton;
         private Button redoButton;
         private Button button1;
+        private NumericUpDown zval;
     }
 }

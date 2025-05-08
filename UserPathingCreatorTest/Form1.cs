@@ -331,7 +331,7 @@ namespace UserPathingCreatorTest
             for (int y = 0; y <= canvas.Height; y += spacing)
                 g.DrawLine(gridPen, 0, y, canvas.Width, y);
 
-            int dotSize = (int)(10 * zoomLevel); // Adjust dot size based on zoom
+            int dotSize = (int)(100 * zoomLevel); // Adjust dot size based on zoom
 
             foreach (var point in pathPoints)
             {
@@ -394,7 +394,7 @@ namespace UserPathingCreatorTest
 
                         if (int.TryParse(input, out int zValue) && zValue >= 0)
                         {
-                            point.Z = zValue;
+                            point.Z = (int)zval.Value;
                             UpdatePinnedPointsAndUI();
                         }
                         else
